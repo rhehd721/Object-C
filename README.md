@@ -142,7 +142,7 @@ int area = [rect size];
 @synthesize value;
 @end
 ```
-- 
+- 사용
 ```objc
 int mian(){
     Example *ex = [[Example alloc]init];
