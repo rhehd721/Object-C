@@ -102,7 +102,8 @@ NSLog(@"Result : %ld", result);
 Rectangle *rect = [[Rectangle alloc] init];
 int area = [rect size];
 ```
-- 멤버변수 접근 가능
+- 멤버변수 접근 가능
+
 ```objc
 -(int)size{
     return width*height;
