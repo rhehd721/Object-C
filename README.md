@@ -127,3 +127,18 @@ int area = [rect size];
     return width*height;    // ERROR
 }
 ```
+
+## 프로퍼티(인스턴스 변수 접근)
+- interface 영역
+```objc
+@interface Example : NSObject{
+   float value;
+}
+@property float value;
+```
+- implementation 영역
+```objc
+@implementation Example
+@synthesize value;
+@end
+```
