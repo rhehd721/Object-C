@@ -135,6 +135,7 @@ int area = [rect size];
    float value;
 }
 @property float value;
+@end
 ```
 - implementation 영역
 ```objc
