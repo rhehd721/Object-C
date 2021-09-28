@@ -26,7 +26,7 @@
 ```objc
 NSString *str = @"Hello ObjC";
 NSUInteger len = [str length];
-NSLOG(@"Length of str is : %lu",len);
+NSLOG(@"Length of str is : %lu",len);   // @문자열 == NSString 객체
 ```
 
 ## 객체생성
