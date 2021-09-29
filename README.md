@@ -142,7 +142,7 @@ int area = [rect size];
 @interface Example : NSObject{
    float value;
 }
-@property float value;
+@property (readwrite) float value;
 @end
 ```
 - implementation 영역
