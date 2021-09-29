@@ -330,3 +330,31 @@ Counter j;  // == int j
  
 @end
 ```
+
+## 프로토콜
+- “선언만 되고 구현되지 않은” 메소드
+    - 다른 객체가 구현해주면 되는 메소드를 선언
+    - 클래스를 숨기고 인터페이스만 선언하고자 할 때
+    - 상속관계가 아니지만 비슷한 인터페이스를 만들고자 할 때
+```objc
+@protocol NSCopying <protocolName>
+-(id)copyWithZone:(NSZone*)zone;
+// @required : 반드시 구현해야 하는 메소드
+// @optional : 구현해도 되고 안해도 되는 메소드
+@end
+////////////////////////////////
+@interface AddressBook: NSObject <NSCopying, ...>
+```
+- 객체가 프로토콜에 따르는지 알아보는 방법
+```objc
+id currentObject;
+    ...
+if ([currentObject conformsToProtocol: @protocol (Drawing)] == YES){
+    // currentObject에 존재하는 프로토콜 인스턴스에 메세지를 보낸다.
+    ...
+}
+```
+- 프로토콜을 따르는 변수 표기
+```objc
+id <Drawing, NSCopying> myDocument;
+```
