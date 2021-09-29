@@ -387,5 +387,3 @@ union mixed{
     int i;
 };
 ```
-
-```
