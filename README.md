@@ -358,3 +358,34 @@ if ([currentObject conformsToProtocol: @protocol (Drawing)] == YES){
 ```objc
 id <Drawing, NSCopying> myDocument;
 ```
+
+## 전처리기
+- #define
+- #연산자 ##연산자
+- #import
+- #ifdef, #endif, #else, #ifndef
+- #if, #elif
+- #undef
+
+## 구조체
+```objc
+strct date  [
+    int month;
+    int day;
+    int year;
+}Date;
+
+//strct date today;
+Date today;
+today.day = 21;
+
+## 공용체
+```objc
+union mixed{
+    char c;
+    float f;
+    int i;
+};
+```
+
+```
