@@ -5,6 +5,11 @@
     - 클래스 : 대문자로 시작하는 명사형
     - 인스턴스/멤버면수 : 소문자로 시작하는 명사형
     - 메소드/함수 : 소문자로 시작하는 동사형
+- 상속으로 메서드를 제거하거나 삭제할 순 없지만 '재정의'하여 메서드의 정의를 변경할 수는 있다.
+    - 메소드를 호출 할 경우 해당 클래스에서 메서드를 찾은 후 찾지 못한 경우 상위 클래스에서 메서드를 찾아 호출하기 때문
+- objc 장점
+    - 다형성(Override)이 가능하다.
+    - 
 
 ## nil
 - 아무것도 가르키지 않는 상태
@@ -55,6 +60,7 @@ NSLog(@"Result : %ld", result);
 ```
 - Test.h
 ```objc
+// @interface에선 상속, 변수선언, 함수선언등의 작업이 이루어 진다.
 @interface Rectangle : NSObject{
     int height;
 }
@@ -70,6 +76,7 @@ NSLog(@"Result : %ld", result);
 ```
 - Test.m
 ```objc
+// @implementation에선 선언했던 함수의 구현이 이루어 진다.
 #import "Test.h"
 @implementation Rectangle{
     int width;
@@ -140,7 +147,7 @@ int area = [rect size];
 - implementation 영역
 ```objc
 @implementation Example
-@synthesize value;
+@synthesize value;  // 자료형을 제외한 변수명만 작성한다.
 @end
 ```
 - 사용
@@ -151,4 +158,43 @@ int mian(){
     
     return 0;
 }
+```
+
+##  self
+- 자기 자신의 인스턴스 메소드 호출하기
+```objc
+// EX
+@implementation Minus
+
+-(void)minusAB{
+    NSLog(@"A - B : %i", a-b);
+    [self plusAB];
+}
+-(void)plusAB{
+    NSLog(@"plus AB!");
+}
+
+@end
+```
+
+## @class 지시어
+```objc
+#import XYPoint.h == @class XYPoint
+```
+
+## 동적바인딩과 id형
+- id는 어떤 클래스 객체든 저장하여 사용할 수 있다.
+```objc
+id dataValue;   // *를 붙이지 않는다.
+Fraction *f1 = [[Fraction alloc]init];
+Complex *c1 = [[Complex alloc]init];
+
+[f1 setTo:2 over:5];
+[c1 setReal:10.0 andImaginary:2.5];
+
+dataValue = f1;
+[dataValue print];
+
+dataValue = c1;
+[dataValue print];
 ```
