@@ -8,8 +8,9 @@
 - 상속으로 메서드를 제거하거나 삭제할 순 없지만 '재정의'하여 메서드의 정의를 변경할 수는 있다.
     - 메소드를 호출 할 경우 해당 클래스에서 메서드를 찾은 후 찾지 못한 경우 상위 클래스에서 메서드를 찾아 호출하기 때문
 - objc 장점
-    - 다형성(Override)이 가능하다.
-    - 동적 타이핑, 동적 바인딩이 가능하다.
+    - 다형성(Override)이 가능하다. : 동일한 메서드 이름을 사용할 수 있다.
+    - 동적 타이핑이 가능하다. : 객체가 속한 클래스를 알아내는 단계를 프로그램이 실행될 때로 미룬다.
+    - 동적 바인딩이 가능하다. : 객체에 호출되는 실제 메서드를 알아내는 시기를 프로그램 실행 중으로 미룬다.
 
 ## nil
 - 아무것도 가르키지 않는 상태
@@ -197,4 +198,135 @@ dataValue = f1;
 
 dataValue = c1;
 [dataValue print];
+```
+
+## @selector
+
+## @try
+```objc
+// Ex
+int main(){
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc]init];
+    Fraction *f = [[Fraction alloc]init];
+    
+    @try {  // try실패시 프로그램 종료가 아닌 catch 실행
+        [f noSuchMethod];
+    }
+
+    @catch (NSException * e) {
+        NSLog(@"Error: %@%@", [e name], [e reason]);
+    }
+    @finally {
+        NSLog(@"Finally executes no matter what");
+    }
+    
+    [f release];
+    [pool drain];
+    return 0;
+```
+- @finally : @try 블록에서 예외의 싱행 유무와 상관없이 실행 할 코드를 작성할 수 있다.
+- @throw : 직접 만든 예외를 던질 수 있다.
+
+## 인스턴스 변수의 범위
+- @protected : 어떤 클래스에서 인스턴스 변수가 정의되었을 때, 그 클래스와 그 서브클래스에 정의된 메서드는 이 인스턴스 변수에 바로 접근할 수 있다. 이것이 기본값 이다.
+- @private : 클래스에 정의된 메서드는 인스턴스 변수에 바로 접근할 수 있지만, 서브클래스의 메서드는 바로 접근할 수 없다.
+- @public : 인스턴스 변수가 정의된 클래스와 그 밖에 클래스 그리고 모듈에 정의된 메서드라면, 인스턴스 변수에 바로 접근할 수 있다.
+- @package : 64비트 이미지의 경우, 그 클래스를 구현하는 이미지 안에서든 어디든 인스턴스 변수에 접근할 수 있다.
+
+## 식별자
+- extern
+    - 전역변수를 다른 프로그램 파일에서도 함께 사용할 수 있도록 해주는 선언 방법 == 외부변수
+```objc
+extern int gMoveNumber;
+```
+- static
+    - 정적변수
+```objc
+static int gGlobalVar = 0;
+```
+- const
+    - 값이 변하지 않는 변수 == 상수
+- volatile
+    - 값이 변할 예정인 변수
+
+## 열거 데이터 형
+```objc
+enum direction{up, down, left = 10, right };
+// up == 0
+// down == 1
+// left == 10
+// right == 11
+```
+
+## typedef
+```objc
+typedef Number *NumberObject;   // typedef 기존이름 새이름
+// Ex
+typedef int Counter;
+Counter j;  // == int j
+```
+
+## 카테고리
+- 클래스 정의를 그룹짓거나, 연관된 메서드를 카테고리로 쉽게 모듈러화할 수 있게 해준다. 또한 원본 소스코드에 접근하거나 서브클래스 생성 없이 현존한느 클래스의 정의를 쉽게 확장하는 방법이다.
+```objc
+// 정의부
+//NSString+Reorder
+#import <Foundation/NSString.h>
+@interface NSString (Reorder)
+    -(NSString *)reversedString;
+@end
+// 구현부
+#import "NSString+Reorder.h"
+#import "NSString+PathComp.h"
+@implementation NSString
+-(NSString *)reversedString
+{
+    ...
+}
+@end
+```
+- 카테고리는 클래스에 인스턴스 변수를 추가할 수 없으며 메소드만 추가할 수 있습니다. 대신 클래스 메소드와 인스턴스 메소드를 모두 선언할 수 있습니다.
+
+## 익스텐션(익명 카테고리)
+- 익스텐션을 사용하면 클래스의 @interface 부분을 나누어 사용할 수 있지만 @implementation 부분은 분리할 수 없습니다. 일부 메소드의 프로토타입을 인터페이스로 공개하지 않게 구성할 때 유용합니다.
+```objc
+// 익스텐션은 @interface에 카테고리 이름을 지정하지 않으며 원래 클래스의 @implementation 부분에 구현해야 합니다.
+// Ship.h
+#import <Foundation/Foundation.h>
+#import "Person.h"
+ 
+@interface Ship : NSObject
+ 
+@property (strong, readonly) Person *captain;
+ 
+-(id)initWithCaptain:(Person *)captain;
+ 
+@end
+
+// Ship.m
+#import "Ship.h"
+ 
+// The class extension.
+@interface Ship()
+ 
+@property (strong, readwrite) Person *captain;
+ 
+@end
+ 
+ 
+// The standard implementation.
+@implementation Ship
+ 
+@synthesize captain = _captain;
+ 
+-(id)initWithCaptain:(Person *)captain {
+    self = [super init];
+    if (self) {
+        // This WILL work because of the extension.
+        [self setCaptain:captain];
+    }
+    return self;
+}
+ 
+@end
 ```
