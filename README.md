@@ -448,6 +448,11 @@ dataArray2 = [dataArray mutalbeCopy];   // 깊은 복사
 ```
 
 ## 아카이빙
-
+- 하나 이상의 객체를 나중에 복구할 수 있는 형식으로 저장하는 절차
+### XML 프로퍼치 리스트로 아카이빙하기
+- 사용하는 객체가 NSString, NSDictionary, NSArray, NSDate, NSData, NSNumber라면, 이 클래스에 구현된 wirteToFile:atomically: 메서드를 사용하여 데이터를 파일에 기록할 수 있다.
+### NSKeyedArchiver로 아카이빙하기
+- 어느 형식의 객체든 파일에 기록할 수 있는 조금 더 유연한 방법
+### 인코딩 메서드와 디코딩 메서드 작성하기
 
 
