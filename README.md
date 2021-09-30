@@ -162,7 +162,14 @@ int mian(){
     return 0;
 }
 ```
-
+- 옵션
+    - 값 설정 방법
+        - assign : 값을 복사 설정, 기본값, 프리미티브 자료형에 적합
+        - retain : 멤버변수가 인스턴스 포인터 값을 가질 때, 오너십을 위해 retain 증가
+        - copy : 멤버변수가 인스턴스 포인터 값을 가질 때, 인스턴스 복사
+    - 동시성
+        - atomic : getter/setter는 선형 스레드를 통해 독립 실행
+        - nonatomic : getter/setter는 다중 스레드를 통해 독립 실행
 ##  self
 - 자기 자신의 인스턴스 메소드 호출하기
 ```objc
