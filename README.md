@@ -11,6 +11,9 @@
     - 다형성(Override)이 가능하다. : 동일한 메서드 이름을 사용할 수 있다.
     - 동적 타이핑이 가능하다. : 객체가 속한 클래스를 알아내는 단계를 프로그램이 실행될 때로 미룬다.
     - 동적 바인딩이 가능하다. : 객체에 호출되는 실제 메서드를 알아내는 시기를 프로그램 실행 중으로 미룬다.
+- '객체가 아니다'란
+    - 미리 정의된 사이즈가 존재하기 때문에 힙 메모리에 동적할당 되지 않는다.
+    - 즉, 포인터로 변수에 접근하지 않아도 된다.  
 
 ## nil
 - 아무것도 가르키지 않는 상태
@@ -142,7 +145,7 @@ int area = [rect size];
 @interface Example : NSObject{
    float value;
 }
-@property (readwrite) float value;
+@property (copy, nonatomic) (readwrite) float value;
 @end
 ```
 - implementation 영역
@@ -389,4 +392,62 @@ union mixed{
 ```
 
 # Foundation
+- NSNumber (숫자 객체)
+    - Foundation.NSValue.h
+```objc
+NSNumber *myNumber;
+NSInteger myInt;    // NSInteger는 객체가 아니다
+myNumber = [NSNumber numberwithInteger:100];
+myInt = [intNumber intergerValue];  // NSInteger는 객체가 아니다
+```
+- NSString, NSMutableString(스트링 객체)
+    - Foundation.NSString.h
+```objc
+NSString *str = @"Programmin is fun!";  // 수정 불가능한 객체
+NSMutableString *mstr;  // 수정 가능한 객체
+NSLog(@"%@", str);
+```
+- NSArray, NSMutableArray(배열 객체)
+    - Foundation.NSArray.h
+```objc
+NSArray *monthNames = [NSArray arrayWithObjects:
+    @"January", @"February", @"March" ... , nil];   // nil은 배열의 끝을 알린다.
+for(int i = 0; i < [monthNames count]; ++i){
+    NSLog(@"2i  %@", i+1, [monthNames objectAtIndex : i]);
+NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20]; // 수정 가능한 Array
+```
+- NSMutableDictionary(딕셔너리 객체)
+    - Foundation.NSDictionary.h
+    - Key는 객체로 얻는다.
+    - Value가 nil이여선 안된다.
+    - 딕셔너리 객체는 순서가 없다.
+```objc
+NSMutableDictionary *glossary = [NSMutableDictionary dictionary];
+[glossary setObject: @"A class" forKey:@"abstract class"];
+```
+- NSSet, NSMutableSet(세트 객체)
+    - Foundation.NSSet.h
+    - 유일한 객체들의 모임
+
+
+## NSFileManager(파일 다루기)
+- NSData(버퍼생성)
+- NSPathUtilities.h(경로 다루기)
+- NSProcessInfo
+- NSFileHandle(기본 파일 작업)
+
+## 메모리 관리
+- PASS
+
+## Copy, mutalbeCopy
+```objc
+NSMutableArray *dataArray = [NSMutableArray alloc]init];
+NSMutableArray *dataArray2 = [NSMutableArray alloc]init];
+dataArray2 = dataArray;     // 얕은 복사
+dataArray2 = [dataArray mutalbeCopy];   // 깊은 복사
+```
+
+## 아카이빙
+
+
 
