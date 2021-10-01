@@ -55,7 +55,7 @@ NSLog(@"Result : %ld", result);
 
 ## 클래스
 
-### 선언
+### 클래스 선언
 - 형식
 ```objc
 @interface ClassName : SuperClass
@@ -71,7 +71,7 @@ NSLog(@"Result : %ld", result);
 @end
 ```
 
-### 구현
+### 클래스 구현
 - 형식
 ```objc
 @implementation ClassName
@@ -135,6 +135,33 @@ int area = [rect size];
 ```objc
 +(int)size{
     return width*height;    // ERROR
+}
+```
+
+## 초기화 메서드
+```objc
+-(id)init{
+    self = [super init];
+    if(self){   // 초기화가 불가능할 경우 nil을 리턴하기 때문
+        firstNumber = ((int)random() % 100 );
+        secondNumber = ((int)random() % 100 );
+    }
+    return self;
+}
+```
+- 만약 새로운 init 메서드를 작성하고 싶다면
+```objc 
+-(id)init{
+    return [self initWithEntryDate:[NSdate date]];
+}
+-(id)initWithEntryDate:(NSDate *)theDate{
+    self = [super init];
+    if(self){   
+        entryDate = theDate;
+        firstNumber = ((int)random() % 100 );
+        secondNumber = ((int)random() % 100 );
+    }
+    return self;
 }
 ```
 
