@@ -423,6 +423,13 @@ union mixed{
     int i;
 };
 ```
+## DataSource(보여지는 것 == MVC 중 View에 해당)
+- Data를 받아 View에 그려주는 역할
+
+
+## Delegate(행해지는 것 == MVC 중 Control에 해당)
+- 하나의 객체가 모든 일을 처리하는 것이 아니라 처리해야 할 일부를 다른 객체에 넘기는 것
+
 
 # Foundation
 - NSNumber (숫자 객체)
