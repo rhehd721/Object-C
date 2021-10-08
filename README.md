@@ -484,7 +484,7 @@ _tableArr = [NSMutableArray arrayWithObjects:@"Process1",@"Process2",@"Process3"
 ```
 
 - NSTableView
-- view base, cell base 
+    - view base, cell base 조심
 ```objc
 @property (weak) IBOutlet NSTableView *tableView;
 
@@ -512,6 +512,9 @@ _tableArr = [NSMutableArray arrayWithObjects:@"Process1",@"Process2",@"Process3"
     return [_testArray objectAtIndex:rowIndex];
 }
 ```
+
+- NSOutlineView
+
 
 ## NSFileManager(파일 다루기)
 - NSData(버퍼생성)
