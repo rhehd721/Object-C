@@ -440,6 +440,7 @@ NSInteger myInt;    // NSInteger는 객체가 아니다
 myNumber = [NSNumber numberwithInteger:100];
 myInt = [intNumber intergerValue];  // NSInteger는 객체가 아니다
 ```
+
 - NSString, NSMutableString(스트링 객체)
     - Foundation.NSString.h
 ```objc
@@ -447,6 +448,7 @@ NSString *str = @"Programmin is fun!";  // 수정 불가능한 객체
 NSMutableString *mstr;  // 수정 가능한 객체
 NSLog(@"%@", str);
 ```
+
 - NSArray, NSMutableArray(배열 객체)
     - Foundation.NSArray.h
 ```objc
@@ -456,6 +458,7 @@ for(int i = 0; i < [monthNames count]; ++i){
     NSLog(@"2i  %@", i+1, [monthNames objectAtIndex : i]);
 NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20]; // 수정 가능한 Array
 ```
+
 - NSMutableDictionary(딕셔너리 객체)
     - Foundation.NSDictionary.h
     - Key는 객체로 얻는다.
@@ -465,10 +468,49 @@ NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20]; // 수정 가능
 NSMutableDictionary *glossary = [NSMutableDictionary dictionary];
 [glossary setObject: @"A class" forKey:@"abstract class"];
 ```
+
 - NSSet, NSMutableSet(세트 객체)
     - Foundation.NSSet.h
     - 유일한 객체들의 모임
 
+- NSMutableArray
+```objc
+@property NSMutableArray *tableArr;
+
+_tableArr = [NSMutableArray arrayWithObjects:@"Process1",@"Process2",@"Process3",@"Process4",@"Process5",@"Process6", nil]; // data init
+
+[_testArray addObject:[NSString stringWithFormat:@"Process%lu", _testArray.count+1]];   // data add
+[_testArray removeLastObject];  // last objct del
+```
+
+- NSTableView
+```objc
+@property (weak) IBOutlet NSTableView *tableView;
+
+[_tableView reloadData];    // table reload
+
+- (instancetype)initWithWindowNibName:(NSNibName)windowNibName {    // table init
+    self = [super initWithWindowNibName:windowNibName];
+    if(self) {
+        NSLog(@"init");
+//        self.testArray = @[@"Process1",@"Process2",@"Process3",@"Process4",@"Process5",@"Process6"];
+    }
+    return self;
+}
+
+#pragma mark tableview delegate
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView1 // table row count
+{
+    NSLog(@"datasource count");
+    return [_testArray count];
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex   // table data set?
+{
+    NSLog(@"datasource item");
+    return [_testArray objectAtIndex:rowIndex];
+}
+```
 
 ## NSFileManager(파일 다루기)
 - NSData(버퍼생성)
