@@ -484,6 +484,7 @@ _tableArr = [NSMutableArray arrayWithObjects:@"Process1",@"Process2",@"Process3"
 ```
 
 - NSTableView
+- view base, cell base 
 ```objc
 @property (weak) IBOutlet NSTableView *tableView;
 
