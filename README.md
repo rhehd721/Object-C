@@ -450,16 +450,31 @@ myInt = [intNumber intergerValue];  // NSInteger는 객체가 아니다
 NSString *str = @"Programmin is fun!";  // 수정 불가능한 객체
 NSMutableString *mstr;  // 수정 가능한 객체
 NSLog(@"%@", str);
+
+NSString *strInt = @"123";
+NSLog(@"%d", [strInt intValue]);    // str to int
+
+int intStr = 123;
+NSLog(@"%@", [NSString stringWithFormat:@"%d", intStr]);    // int to str
 ```
 
-- NSArray, NSMutableArray(배열 객체)
+- NSArray(배열 객체)
     - Foundation.NSArray.h
+
+|메소드|내용|
+|------|---|
+|count|자료의 갯수를 리턴한다.|
+|initWithObjects:|값을 설정한다|
+|objectAtIndex:|주어진 index의 위치한 객체를 리턴한다.|
+|containsObject:|주어진 객체가 자료구조 안에 있는지 알아본다.|
+|@[...]|[[NSArray alloc]initWithObject:..., nil]에 대응된다.|
+
 ```objc
 NSArray *monthNames = [NSArray arrayWithObjects:
     @"January", @"February", @"March" ... , nil];   // nil은 배열의 끝을 알린다.
 for(int i = 0; i < [monthNames count]; ++i){
     NSLog(@"2i  %@", i+1, [monthNames objectAtIndex : i]);
-NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20]; // 수정 가능한 Array
+
 ```
 
 - NSMutableDictionary(딕셔너리 객체)
@@ -467,16 +482,34 @@ NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20]; // 수정 가능
     - Key는 객체로 얻는다.
     - Value가 nil이여선 안된다.
     - 딕셔너리 객체는 순서가 없다.
+
+|메소드|내용|
+|------|---|
+|setObject:forKey:|key, value를 추가한다. 해당 key가 존재한다면 값이 수정된다.|
+|objectForKey:|해당 key를 찾아 객체를 리턴한다. key를 찾지 못한다면 nil을 리턴한다.|
+|count|자료의 갯수를 리턴한다.|
+|removeObjectForKey:|해당하는 key를 찾아 그 객체와 같이 제거한다.|
+|removeAllObjects|모든 자료를 제거한다.|
+|allKeys|모든 key를 NSArray애 담아 리턴한다.|
 ```objc
 NSMutableDictionary *glossary = [NSMutableDictionary dictionary];
 [glossary setObject: @"A class" forKey:@"abstract class"];
 ```
+
 
 - NSSet, NSMutableSet(세트 객체)
     - Foundation.NSSet.h
     - 유일한 객체들의 모임
 
 - NSMutableArray
+|메소드|내용|
+|------|---|
+|addObject:|끝에 자료를 추가한다.|
+|removeObject:|주어진 객체를 찾아서 제거한다.|
+|exchangeObjectAtIndex:withObjectAtIndex|객체를 교환한다.|
+|replaceObjectAtIndex:withObject|주어진 위치의 객체를 새로 입력되는 객체로 교체한다.|
+|sortUsingComparator|익명함수를 비교자로 사용하여 자료를 정렬한다|
+
 ```objc
 @property NSMutableArray *tableArr;
 
@@ -484,6 +517,8 @@ _tableArr = [NSMutableArray arrayWithObjects:@"Process1",@"Process2",@"Process3"
 
 [_testArray addObject:[NSString stringWithFormat:@"Process%lu", _testArray.count+1]];   // data add
 [_testArray removeLastObject];  // last objct del
+
+NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20];
 ```
 
 - NSTableView
