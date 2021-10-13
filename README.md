@@ -435,8 +435,9 @@ union mixed{
 
 
 # Foundation
-- NSNumber (숫자 객체)
-    - Foundation.NSValue.h
+
+## NSNumber (숫자 객체)
+- Foundation.NSValue.h
 ```objc
 NSNumber *myNumber;
 NSInteger myInt;    // NSInteger는 객체가 아니다
@@ -444,8 +445,8 @@ myNumber = [NSNumber numberwithInteger:100];
 myInt = [intNumber intergerValue];  // NSInteger는 객체가 아니다
 ```
 
-- NSString, NSMutableString(스트링 객체)
-    - Foundation.NSString.h
+## NSString, NSMutableString(스트링 객체)
+- Foundation.NSString.h
 ```objc
 NSString *str = @"Programmin is fun!";  // 수정 불가능한 객체
 NSMutableString *mstr;  // 수정 가능한 객체
@@ -458,8 +459,8 @@ int intStr = 123;
 NSLog(@"%@", [NSString stringWithFormat:@"%d", intStr]);    // int to str
 ```
 
-- NSArray(배열 객체)
-    - Foundation.NSArray.h
+## NSArray(배열 객체)
+- Foundation.NSArray.h
 
 |메소드|내용|
 |------|---|
@@ -470,7 +471,6 @@ NSLog(@"%@", [NSString stringWithFormat:@"%d", intStr]);    // int to str
 |@[...]|[[NSArray alloc]initWithObject:..., nil]에 대응된다.|
 |-(BOOL)isEqualToArray:(id)anObject :|배열의 요소 개수와 모든 멤버가 동일하면 YES 아니면 NO를 리턴|
 |-(id)firstObjectCommonWithArray:(NSArray *)otherArray :|일치하는 첫번째 인스턴스 리턴|
-|||
 
 ```objc
 NSArray *monthNames = [NSArray arrayWithObjects:
@@ -479,7 +479,7 @@ for(int i = 0; i < [monthNames count]; ++i){
     NSLog(@"2i  %@", i+1, [monthNames objectAtIndex : i]);
 ```
 
-- NSMutableArray
+## NSMutableArray
 |메소드|내용|
 |------|---|
 |addObject:|끝에 자료를 추가한다.|
@@ -500,11 +500,11 @@ _tableArr = [NSMutableArray arrayWithObjects:@"Process1",@"Process2",@"Process3"
 NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20];
 ```
 
-- NSMutableDictionary(딕셔너리 객체)
-    - Foundation.NSDictionary.h
-    - Key는 객체로 얻는다.
-    - Value가 nil이여선 안된다.
-    - 딕셔너리 객체는 순서가 없다.
+## NSMutableDictionary(딕셔너리 객체)
+- Foundation.NSDictionary.h
+- Key는 객체로 얻는다.
+- Value가 nil이여선 안된다.
+- 딕셔너리 객체는 순서가 없다.
 
 |메소드|내용|
 |------|---|
@@ -519,13 +519,12 @@ NSMutableDictionary *glossary = [NSMutableDictionary dictionary];
 [glossary setObject: @"A class" forKey:@"abstract class"];
 ```
 
+## NSSet, NSMutableSet(세트 객체)
+- Foundation.NSSet.h
+- 유일한 객체들의 모임
 
-- NSSet, NSMutableSet(세트 객체)
-    - Foundation.NSSet.h
-    - 유일한 객체들의 모임
-
-- NSTableView
-    - view base, cell base 조심
+## NSTableView
+- view base, cell base 조심
 ```objc
 @property (weak) IBOutlet NSTableView *tableView;
 
@@ -554,7 +553,7 @@ NSMutableDictionary *glossary = [NSMutableDictionary dictionary];
 }
 ```
 
-- NSOutlineView
+## NSOutlineView
 
 
 ## NSFileManager(파일 다루기)
