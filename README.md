@@ -1,4 +1,4 @@
-# Object-C
+# Objective-C
 
 ## 기본정보
 - 작명규칙
