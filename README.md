@@ -468,13 +468,36 @@ NSLog(@"%@", [NSString stringWithFormat:@"%d", intStr]);    // int to str
 |objectAtIndex:|주어진 index의 위치한 객체를 리턴한다.|
 |containsObject:|주어진 객체가 자료구조 안에 있는지 알아본다.|
 |@[...]|[[NSArray alloc]initWithObject:..., nil]에 대응된다.|
+|-(BOOL)isEqualToArray:(id)anObject :|배열의 요소 개수와 모든 멤버가 동일하면 YES 아니면 NO를 리턴|
+|-(id)firstObjectCommonWithArray:(NSArray *)otherArray :|일치하는 첫번째 인스턴스 리턴|
+|||
 
 ```objc
 NSArray *monthNames = [NSArray arrayWithObjects:
     @"January", @"February", @"March" ... , nil];   // nil은 배열의 끝을 알린다.
 for(int i = 0; i < [monthNames count]; ++i){
     NSLog(@"2i  %@", i+1, [monthNames objectAtIndex : i]);
+```
 
+- NSMutableArray
+|메소드|내용|
+|------|---|
+|addObject:|끝에 자료를 추가한다.|
+|removeObject:|주어진 객체를 찾아서 제거한다.|
+|exchangeObjectAtIndex:withObjectAtIndex|객체를 교환한다.|
+|replaceObjectAtIndex:withObject|주어진 위치의 객체를 새로 입력되는 객체로 교체한다.|
+|sortUsingComparator|익명함수를 비교자로 사용하여 자료를 정렬한다|
+|-(void)insertObject:(id)anObject atIndex:(NSUinter)index|index 번째에 anObject 추가|
+
+```objc
+@property NSMutableArray *tableArr;
+
+_tableArr = [NSMutableArray arrayWithObjects:@"Process1",@"Process2",@"Process3",@"Process4",@"Process5",@"Process6", nil]; // data init
+
+[_testArray addObject:[NSString stringWithFormat:@"Process%lu", _testArray.count+1]];   // data add
+[_testArray removeLastObject];  // last objct del
+
+NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20];
 ```
 
 - NSMutableDictionary(딕셔너리 객체)
@@ -500,26 +523,6 @@ NSMutableDictionary *glossary = [NSMutableDictionary dictionary];
 - NSSet, NSMutableSet(세트 객체)
     - Foundation.NSSet.h
     - 유일한 객체들의 모임
-
-- NSMutableArray
-|메소드|내용|
-|------|---|
-|addObject:|끝에 자료를 추가한다.|
-|removeObject:|주어진 객체를 찾아서 제거한다.|
-|exchangeObjectAtIndex:withObjectAtIndex|객체를 교환한다.|
-|replaceObjectAtIndex:withObject|주어진 위치의 객체를 새로 입력되는 객체로 교체한다.|
-|sortUsingComparator|익명함수를 비교자로 사용하여 자료를 정렬한다|
-
-```objc
-@property NSMutableArray *tableArr;
-
-_tableArr = [NSMutableArray arrayWithObjects:@"Process1",@"Process2",@"Process3",@"Process4",@"Process5",@"Process6", nil]; // data init
-
-[_testArray addObject:[NSString stringWithFormat:@"Process%lu", _testArray.count+1]];   // data add
-[_testArray removeLastObject];  // last objct del
-
-NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20];
-```
 
 - NSTableView
     - view base, cell base 조심
