@@ -588,6 +588,10 @@ dataArray2 = [dataArray mutalbeCopy];   // 깊은 복사
 
 
 ### NSCoding
+|메서드|내용|
+|---|---|
+|-(void)encodeObject:(id)anObject forKey:(NSString *)aKey|anObject를 기록하고 해당 객체에 대한 키로 aKey를 설정한다.|
+|||
 
 ### XML 프로퍼치 리스트로 아카이빙하기
 - 사용하는 객체가 NSString, NSDictionary, NSArray, NSDate, NSData, NSNumber라면, 이 클래스에 구현된 wirteToFile:atomically: 메서드를 사용하여 데이터를 파일에 기록할 수 있다.
