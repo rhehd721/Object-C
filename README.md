@@ -604,4 +604,3 @@ dataArray2 = [dataArray mutalbeCopy];   // 깊은 복사
 
 ### 인코딩 메서드와 디코딩 메서드 작성하기
 
-
