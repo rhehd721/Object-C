@@ -574,11 +574,30 @@ dataArray2 = [dataArray mutalbeCopy];   // 깊은 복사
 ```
 
 ## 아카이빙
+- archive : 객체를 바이트로, unarchive : 바이트를 객체로
 - 하나 이상의 객체를 나중에 복구할 수 있는 형식으로 저장하는 절차
+
+### NSCoder
+- 바이트 스트림을 추사화한 것
+
+
+|메서드|내용|
+|---|---|
+|-(id)initWithCoder:(NSCoder *)coder;|coder에서 데이터를 읽어오고 이 데이터를 객체의 인스턴스 변수들로 저장한다.|
+|-(void)encodeWithCoder:(NSCoder *)coder;|인스턴스 변수들의 값을 읽어 코더에 그 값을 저장한다.|
+
+
+### NSCoding
+
 ### XML 프로퍼치 리스트로 아카이빙하기
 - 사용하는 객체가 NSString, NSDictionary, NSArray, NSDate, NSData, NSNumber라면, 이 클래스에 구현된 wirteToFile:atomically: 메서드를 사용하여 데이터를 파일에 기록할 수 있다.
-### NSKeyedArchiver로 아카이빙하기
-- 어느 형식의 객체든 파일에 기록할 수 있는 조금 더 유연한 방법
+
+### NSKeyedUnarchiver로 아카이빙하기
+- 데이터의 객체를 읽어오기
+
+### NSKeyedArchiver
+
+
 ### 인코딩 메서드와 디코딩 메서드 작성하기
 
 
