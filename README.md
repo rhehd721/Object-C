@@ -1,5 +1,9 @@
 # Objective-C
 
+## X-code Error
+- Metal API Validation Enabled
+    - Scheme > Edit Scheme... > Run > Diagnostics > Metal API Validation.
+
 ## 기본정보
 - 작명규칙
     - 클래스 : 대문자로 시작하는 명사형
