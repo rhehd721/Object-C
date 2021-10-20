@@ -483,6 +483,13 @@ for(int i = 0; i < [monthNames count]; ++i){
     NSLog(@"2i  %@", i+1, [monthNames objectAtIndex : i]);
 ```
 
+- Dictionary가 들어있는 Array Key 값을 기준으로 정렬하기
+
+```objc
+    NSSortDescriptor * descriptor = [[NSSortDescriptor alloc] initWithKey:@"Key_Name" ascending:YES(NO)];
+    Array = [Array sortedArrayUsingDescriptors:@[descriptor]];
+```
+
 ## NSMutableArray
 |메소드|내용|
 |------|---|
