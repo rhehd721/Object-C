@@ -489,6 +489,12 @@ for(int i = 0; i < [monthNames count]; ++i){
     NSSortDescriptor * descriptor = [[NSSortDescriptor alloc] initWithKey:@"Key_Name" ascending:YES(NO)];
     Array = [Array sortedArrayUsingDescriptors:@[descriptor]];
 ```
+```objc
+// 정렬
+_sertList = [_sertList sortedArrayUsingComparator:^(id a,id b){
+       return [a compare:b];
+    }];
+```
 
 ## NSMutableArray
 |메소드|내용|
