@@ -509,6 +509,13 @@ _tableArr = [NSMutableArray arrayWithObjects:@"Process1",@"Process2",@"Process3"
 [_testArray removeLastObject];  // last objct del
 
 NSMutableArray *primes = [NSMutableArray arrayWithCapacity:20];
+
+// Array에 Dictionary 
+NSDictionary *errorCodeDic= [NSDictionary dictionaryWithObjectsAndKeys:
+                                 @"000", @"000 Error",
+                                 @"001", @"001 Error",nil];
+
+    _errorCodeList = [NSMutableArray arrayWithObjects:errorCodeDic,nil];
 ```
 
 ## NSMutableDictionary(딕셔너리 객체)
