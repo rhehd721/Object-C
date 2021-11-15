@@ -461,6 +461,9 @@ NSLog(@"%d", [strInt intValue]);    // str to int
 
 int intStr = 123;
 NSLog(@"%@", [NSString stringWithFormat:@"%d", intStr]);    // int to str
+
+// 중간 글자 
+[lineContents substringWithRange:NSMakeRange(1, [lineContents length] - 2)];
 ```
 
 ## NSArray(배열 객체)
