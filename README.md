@@ -637,3 +637,138 @@ dataArray2 = [dataArray mutalbeCopy];   // 깊은 복사
 
 ### 인코딩 메서드와 디코딩 메서드 작성하기
 
+## 시간 관리하기
+```objc
+-(void)startStopwatch{
+    NSTimeInterval seconds = [NSDate timeIntervalSinceReferenceDate];
+    _processRunTimeToMilliseconds = seconds*1000;
+}
+
+-(void)stopStopwatch{
+    NSTimeInterval seconds = [NSDate timeIntervalSinceReferenceDate];
+    _processRunTimeToMilliseconds = (seconds*1000) - _processRunTimeToMilliseconds;
+}
+
+-(NSString *)returnRealTime{
+    NSDateFormatter * today = [[NSDateFormatter alloc] init];
+//    [today setDateFormat:@"yyyy-MM-dd-HH-mm-ss"];
+    [today setDateFormat:@"HH:mm:ss"];
+    NSString * date = [today stringFromDate:[NSDate date]];
+    return date;
+}
+
+-(NSString *)returnDateTime{
+    NSDateFormatter * today = [[NSDateFormatter alloc] init];
+    [today setDateFormat:@"yyyy_MM_dd_HH_mm_ss"];
+    NSString * date = [today stringFromDate:[NSDate date]];
+    return date;
+}
+```
+
+## 파일 관리하기
+
+```objc
+-(void)openFolder:(NSString*)path{
+    _fileURL = [NSURL fileURLWithPath:path];
+    
+    NSURL *folderURL = [_fileURL URLByDeletingLastPathComponent];
+    [[NSWorkspace sharedWorkspace] openURL: folderURL];
+}
+
+-(BOOL)chekcfileExists:(NSString*)fileName fileType:(NSString*)fileType{
+    NSString *filePath =  [[NSBundle mainBundle] pathForResource:fileName ofType:fileType];
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+   
+    return fileExists;
+}
+
+-(NSString*)readFile:(NSString*)filePath fileType:(NSString*)fileType{
+        
+    NSString *filepath = [[NSBundle mainBundle] pathForResource:filePath ofType:fileType];
+    NSError *error;
+    
+    NSString *fileContents = [NSString stringWithContentsOfFile:filepath encoding:NSUTF8StringEncoding error:&error];
+
+    if (error){
+        NSLog(@"Error reading file: %@", error.localizedDescription);
+        return nil;
+    }
+    
+    return fileContents;
+
+}
+
+-(NSArray*)fileContentToArray:(NSString*)fileContent{
+
+    // Separate data by line
+    NSArray* allLinedStrings =
+          [fileContent componentsSeparatedByCharactersInSet:
+          [NSCharacterSet newlineCharacterSet]];
+    
+    return allLinedStrings;
+}
+
+-(NSString *)checkFileSize:(NSString*)path time:(float)time{
+    NSString *filePath = [path stringByExpandingTildeInPath];
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    NSNumber *fileSizeValue = nil;
+    NSError *fileSizeError = nil;
+    [fileURL getResourceValue:&fileSizeValue
+                       forKey:NSURLFileSizeKey
+                        error:&fileSizeError];
+//    if (fileSizeValue) {
+//        NSLog(@"value for %@ is %@ byte", fileURL, fileSizeValue);
+//    }
+//    else {
+//        NSLog(@"error getting size for url %@ error was %@", fileURL, fileSizeError);
+//    }
+    
+    float byteFileSize = [fileSizeValue intValue];
+    if(time <= 0){
+        byteFileSize = byteFileSize;
+    }else{
+        byteFileSize = byteFileSize / (time*0.001);
+    }
+    
+    // byte data to KB or MB
+    NSString * fileSize;
+    if(byteFileSize < 1500000){
+        byteFileSize = byteFileSize * 0.001;
+        fileSize = [NSString stringWithFormat:@"%6.1fKB/s", byteFileSize];
+    }else{
+        byteFileSize = byteFileSize * 0.001;
+        byteFileSize = byteFileSize * 0.001;
+        byteFileSize = byteFileSize / time;
+        fileSize = [NSString stringWithFormat:@"%6.1fMB/s", byteFileSize];
+    }
+    
+    return fileSize;
+}
+
+```
+
+## Base64
+```objc
+@implementation Base64
+-(NSString*)Base64Encoding:(NSString *)plainText{
+
+    NSData *plainData = [plainText dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *encodedText = [plainData base64EncodedStringWithOptions:0];
+
+    NSLog(@"encodedText : %@", encodedText);
+    
+    return encodedText;
+
+}
+
+-(NSString*)Base64Decoding:(NSString *)encodedText{
+
+    NSData *encodedData = [[NSData alloc]initWithBase64EncodedString:encodedText options:0];
+    NSString *decodedText = [[NSString alloc] initWithData:encodedData encoding:NSUTF8StringEncoding];
+
+    NSLog(@"decodedText : %@", decodedText);
+
+    return decodedText;
+}
+@end
+```
