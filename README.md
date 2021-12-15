@@ -124,6 +124,12 @@ int area = [rect size];
 }
 ```
 
+- __nullable
+
+```objc
+-(void)updateTable:(NSInteger)index success:(NSInteger)success port:(NSString* __nullable)port time:(NSString* __nullable)time fileSize:(NSString* __nullable)fileSize groupName:(NSString* __nullable)groupName contents:(NSString* __nullable)contents;
+```
+
 ### 클래스 메소드
 - 클래스 메소드 선언
 ```objc
